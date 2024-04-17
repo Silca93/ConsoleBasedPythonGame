@@ -1,6 +1,9 @@
 import math
 import random
 
+import msvcrt  # For Windows
+
+
 #I import my classes
 import classes
 
@@ -18,14 +21,24 @@ def greet():
         print(" |  /     `       //        '    \\|")
         print(" `//              V                '")
 
+def wait_for_enter():
+  """Waits for the user to press the Enter key."""
+  print("Press 'Enter' to start the game")
+  while True:
+    key = msvcrt.getch()  
+    if key == b'\r':  #
+      break
 
-start = input("Enter 'start' to start the game: ")
 
-if start == 'start':
-    greet()
+wait_for_enter()
+
+greet()
+
+
     
 your_character =  "" 
-
+print("!!! Please, as this is a delta version, for the moment the program only works if you chose the witch. !!!")
+print("_____________________________________________________________________________________________________")
 character_choice = input("Chose your charcacter. 1: Paladin.   2: Witch.     3:Barbarian.")
 print("______________________________________")
 if character_choice == "1":
@@ -65,11 +78,14 @@ distance = 0
 
 while your_character.hp > 0:
     if your_character.place == "village":
-        initialChoice = input("what to do ?: 1.Explore the forest  |  2.Store   |   3.Sleep   ")
+        initialChoice = input("what to do ?: | 1.Explore the forest  |  2.Store   |   3.Sleep   ")
         if initialChoice == "1":
                 your_character.place = "forest"
                 print(f"You venture into the ", your_character.place)
                 print("You have travelled: ", distance + 1, 'km deep into the forest')
+                if distance >= 9:
+                    print("Congratulations you have won! the devs were too busy to write the code for the end game...")
+                    break
         elif initialChoice =="2":
                 buyOption= input("You go to the marketplace.. What do you want to buy ? 1.Potion🧪  |   2.Poison flask ☣️") 
                 if buyOption == "1":
@@ -103,11 +119,14 @@ while your_character.hp > 0:
                     print("You declined the offer.")      
                     
     else:
-        secondary_choice = input("What to do?   1.Explore the forest   |   2.Inventory:     |    3.Return to village")
+        secondary_choice = input("What to do?  |    1.Explore the forest   |   2.Inventory:     |    3.Return to village")
         if secondary_choice == "1":
             print(f"{your_character.name} is venturing deep into the forest...")
             distance +=1
             print("You have travelled: ", distance + 1, 'km deep into the forest')
+            if distance >= 9:
+                    print("Congratulations you have won! the devs were too busy to write the code for the end game...")
+                    break
 
             random_num = random.random()
 
