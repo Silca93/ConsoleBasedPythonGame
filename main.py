@@ -74,12 +74,12 @@ while your_character.hp > 0:
                 your_character.place = "forest"
                 print(f"You venture into the ", your_character.place)
         elif initialChoice =="2":
-                buyOption= input("You go to the marketplace.. What do you want to buy ? 1.Potion  |   2.Poison flask") 
+                buyOption= input("You go to the marketplace.. What do you want to buy ? 1.Potion🧪  |   2.Poison flask☣️") 
                 if buyOption == "1":
                     if your_character.gold < 15:
                         print("You do not have enough gold.. Sell some items first.")
                     else:     
-                        inventory.add("1 Potion")
+                        inventory.add("1 Potion 🧪")
                         your_character.gold -= 15
                         print("Your items: ", inventory.content)
                         print("Your goldcoins 🪙:", your_character.gold)
@@ -88,8 +88,9 @@ while your_character.hp > 0:
                         print("You do not have enough gold.. Sell some items first.")
                     else:     
                         your_character.gold -= 20
-                        inventory.add("1 Poison flask")
+                        inventory.add("1 Poison flask ☣️")
                         print("Your items: ", inventory.content)
+                        print("Your goldcoins 🪙:", your_character.gold)
 
         else:
                 sleepRequest = input("You go to the Inn and ask for a bed. It will cost you 10 coins for the night. Do you accept?: 'y/n':  ")
@@ -112,7 +113,7 @@ while your_character.hp > 0:
             if randomAction == "combat":
                 print(f"{your_character.name} got ganked by a  {classes.creep.name} ")
             elif randomAction == "nothing":
-                print(f"{your_character.name} is venturing deep into the forest...")
+                print(f"{your_character.name} is venturing deep into the forest... this forest is too still...")
             else:
                 print(f"{your_character.name} is venturing deep into the forest... {your_character.name} found an item!")
                 itemsInput = input("Pick up item?  'y'/'n' : ")
@@ -122,5 +123,5 @@ while your_character.hp > 0:
                 else:
                     print(f"{your_character.name} opted not to pick up {randomItem}")    
         else:
-             print(inventory.content)
+            print(inventory.content)
            

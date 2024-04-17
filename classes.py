@@ -69,9 +69,9 @@ class Mob(Enemy):
     def __init__(self, name, hp, maxHp, atk, armor, lvl):
         super().__init__(name, hp, maxHp, atk, armor, lvl)
 
-    def normal_attack(self):
+    def normal_attack(self, damage):
         #  damage = atk
-        self.atk = 15
+        self.damage = 15
 
 
 creep = Mob("skeleton", 40, 40, 15, 10, 1)     
@@ -82,7 +82,7 @@ class Boss(Enemy):
     def __init__(self, name, hp, maxHp, atk, armor, lvl):
         super().__init__(name, hp, maxHp, atk, armor, lvl)
 
-    def Boss_attack(self):
+    def Boss_attack(self, damage):
         #  damage = atk
         self.atk = 20
 
