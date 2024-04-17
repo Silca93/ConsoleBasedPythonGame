@@ -18,8 +18,12 @@ class Witch(Hero):
         super().__init__(name, hp, maxHp, atk, armor, lvl, items, gold, place)
         self.sp_atk = sp_atk
 
-    def frozen_orb(self):
-        print(f"You used frozen orb! You have: {self.gold} gold") 
+    def frozen_orb(self, target):
+        damage = self.sp_atk - target.armor
+        if damage <= 0:
+            damage = 1 
+        target.hp -= damage    
+        print(f"{self.name} used frozen orb! It dealt {damage} to {target.name} ") 
 
 witch_hero = Witch("Merion", 100, 100,  20, 40, 10, 1, [], 50, "village")       
 # __________________________________________________________    
@@ -29,8 +33,8 @@ class Paladin(Hero):
         super().__init__(name, hp, maxHp, atk, armor, lvl, items, gold, place)
         self.shield = shield
         
-    def holy_hammer(self):
-        print("You used holy hammer!") 
+    def blessed_hammer(self):
+        print("You used blessed hammer!") 
 
 paladin_hero = Paladin("Cirat", 140, 140, 40, 25, 1, [], 50, True, "village")           
 
@@ -69,12 +73,15 @@ class Mob(Enemy):
     def __init__(self, name, hp, maxHp, atk, armor, lvl):
         super().__init__(name, hp, maxHp, atk, armor, lvl)
 
-    def normal_attack(self, damage):
-        #  damage = atk
-        self.damage = 15
+    def normal_attack(self, target):
+        damage = self.atk - target.armor
+        if damage <= 0:
+            damage = 1
+        target.hp -= damage   
+        print(f"{self.name} attacked you! it dealt {damage} Hp")  
 
 
-creep = Mob("skeleton", 40, 40, 15, 10, 1)     
+creep = Mob("skeleton", 40, 40, 20, 10, 1)     
 
 # ___________________________________________________
 
@@ -85,7 +92,7 @@ class Boss(Enemy):
     def Boss_attack(self, damage):
         #  damage = atk
         self.atk = 20
-
+    
 
 Steven = Boss("Stevenosaurus-Rex", 100, 100, 30 , 15, 4)         
 
@@ -97,3 +104,6 @@ class Inventory:
 
     def add(self, items):
         self.content.append(items)
+
+
+        
