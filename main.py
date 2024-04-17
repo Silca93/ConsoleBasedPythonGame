@@ -1,5 +1,8 @@
-import classes
+import math
+import random
 
+#I import my classes
+import classes
 
 def greet():
         print("        \\    \\    //      \\      ")
@@ -55,6 +58,15 @@ print(f"You spawned in a {your_character.place} . Defeat {classes.Steven.name} i
 
 inventory = classes.Inventory()
 
+#This will determine what happens every time we choose to explore the forest
+random_num = random.random()
+possibilities = ["combat", "randomItems", "nothing"]
+randomAction = possibilities[math.floor(random_num*len(possibilities))]
+#This will determine what items you find
+itemPossibilites = ["Potion", "goldcoins 🪙", "50xp points"]
+randomItem = itemPossibilites[math.floor(random_num*len(possibilities))]
+
+
 while your_character.hp > 0:
     if your_character.place == "village":
         initialChoice = input("what to do ?: 1.Explore the forest  |  2.Store   |   3.Sleep   ")
@@ -70,7 +82,7 @@ while your_character.hp > 0:
                         inventory.add("1 Potion")
                         your_character.gold -= 15
                         print("Your items: ", inventory.content)
-                        print("Your goldcoins:", your_character.gold)
+                        print("Your goldcoins 🪙:", your_character.gold)
                 elif buyOption == "2":
                     if your_character.gold < 20:
                         print("You do not have enough gold.. Sell some items first.")
@@ -88,11 +100,27 @@ while your_character.hp > 0:
                     if your_character.gold < 10:
                         print("You do no have enough gold! Sell some items first.")
                     else:   
-                        print("Your recovered your health..  goldcoins: ", your_character.gold) 
+                        print("Your recovered your health..  goldcoins 🪙: ", your_character.gold) 
                 else:
                     print("You declined the offer.")      
                     
     else:
         secondary_choice = input("What to do?   1.Explore the forest   |   2.Inventory: ")
-
-
+        if secondary_choice == "1":
+            print(f"{your_character.name} is venturing deep into the forest...")
+            randomAction
+            if randomAction == "combat":
+                print(f"{your_character.name} got ganked by a  {classes.creep.name} ")
+            elif randomAction == "nothing":
+                print(f"{your_character.name} is venturing deep into the forest...")
+            else:
+                print(f"{your_character.name} is venturing deep into the forest... {your_character.name} found an item!")
+                itemsInput = input("Pick up item?  'y'/'n' : ")
+                if itemsInput == "y":
+                    inventory.add(randomItem)
+                    print(f"{your_character.name}  picked up {randomItem}.  Your items:  {inventory.content}")
+                else:
+                    print(f"{your_character.name} opted not to pick up {randomItem}")    
+        else:
+             print(inventory.content)
+           
